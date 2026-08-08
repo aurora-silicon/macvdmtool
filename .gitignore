@@ -1,3 +1,5 @@
 macvdmtool
+macvdmd
+macvdmctl
 .DS_Store
 *.o
