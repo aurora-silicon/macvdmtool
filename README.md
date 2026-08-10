@@ -63,13 +63,14 @@ After the one-time authenticated install, the authorized macOS user can control 
 
 ```sh
 macvdmctl ping
+macvdmctl --help
 macvdmctl reboot
 macvdmctl reboot serial
 macvdmctl reboot debugusb
 macvdmctl dfu
 ```
 
-The daemon listens only on `/var/run/macvdmd.sock`, verifies the connecting peer UID, and accepts only the commands listed above (plus `serial`, `debugusb`, and `nop`). It never invokes a shell. Its installed executable and configuration are root-owned, so changing the user-writable source checkout does not change the privileged service.
+The daemon listens only on `/var/run/macvdmd.sock`, verifies the connecting peer UID, and accepts only the commands listed above (plus `serial`, `debugusb`, `nop`, and the help aliases `help`, `-h`, and `--help`). It never invokes a shell. Its installed executable and configuration are root-owned, so changing the user-writable source checkout does not change the privileged service.
 
 To remove it:
 

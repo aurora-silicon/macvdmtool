@@ -73,7 +73,8 @@ bool command_allowed(const std::vector<std::string> &args)
 {
     if (args.size() == 1) {
         return args[0] == "ping" || args[0] == "reboot" || args[0] == "serial" ||
-               args[0] == "debugusb" || args[0] == "dfu" || args[0] == "nop";
+               args[0] == "debugusb" || args[0] == "dfu" || args[0] == "nop" ||
+               args[0] == "help" || args[0] == "-h" || args[0] == "--help";
     }
     return args.size() == 2 && args[0] == "reboot" &&
            (args[1] == "serial" || args[1] == "debugusb");
@@ -217,6 +218,13 @@ void handle_client(int fd, uid_t allowed_uid, const std::string &tool)
     }
     if (args[0] == "ping") {
         respond(fd, 0, "macvdmd ready\n");
+        return;
+    }
+    if (args[0] == "help" || args[0] == "-h" || args[0] == "--help") {
+        respond(fd, 0,
+                "Usage: macvdmctl <command>\n"
+                "Commands: ping, reboot [serial|debugusb], serial, debugusb, "
+                "dfu, nop, help\n");
         return;
     }
 

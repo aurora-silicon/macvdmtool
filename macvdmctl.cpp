@@ -30,10 +30,21 @@ bool send_all(int fd, const void *data, size_t size)
     return true;
 }
 
-void usage(const char *program)
+void usage(FILE *stream, const char *program)
 {
-    fprintf(stderr,
-            "Usage: %s {ping|reboot [serial|debugusb]|serial|debugusb|dfu|nop}\n",
+    fprintf(stream,
+            "Usage: %s <command>\n"
+            "\n"
+            "Commands:\n"
+            "  ping              Check that the privileged service is ready\n"
+            "  reboot            Reboot the target normally\n"
+            "  reboot serial     Reboot and enter serial mode\n"
+            "  reboot debugusb   Reboot and enter debug USB mode\n"
+            "  serial            Enter serial mode without rebooting\n"
+            "  debugusb          Enter debug USB mode without rebooting\n"
+            "  dfu               Put the target into DFU mode\n"
+            "  nop               Run the macvdmtool no-op command\n"
+            "  help, -h, --help  Show this help\n",
             program);
 }
 
@@ -41,8 +52,15 @@ void usage(const char *program)
 
 int main(int argc, char **argv)
 {
+    if (argc == 2 &&
+        (strcmp(argv[1], "help") == 0 || strcmp(argv[1], "-h") == 0 ||
+         strcmp(argv[1], "--help") == 0)) {
+        usage(stdout, argv[0]);
+        return 0;
+    }
+
     if (argc < 2) {
-        usage(argv[0]);
+        usage(stderr, argv[0]);
         return 2;
     }
 
