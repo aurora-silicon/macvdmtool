@@ -46,7 +46,7 @@ Commands:
   nop - do nothing
 ```
 
-For serial mode use `/dev/cu.debug_console` on the local machine as your serial device. To use it with m1n1, `export M1N1DEVICE=/dev/cu.debug-console`.<br>
-For debugusb mode use `/dev/cu.kis-100000-ch-0` on the local machine as your serial device. To use it with m1n1, `export M1N1DEVICE=/dev/cu.kis-100000-ch-0`.
+For serial mode use `/dev/cu.debug_console` on the local machine as your serial device. To use it with aura, `export AURADEVICE=/dev/cu.debug-console`.<br>
+For debugusb mode use `/dev/cu.kis-100000-ch-0` on the local machine as your serial device. To use it with aura, `export AURADEVICE=/dev/cu.kis-100000-ch-0`.
 
 For typical development, the command you want to use is `macvdmtool reboot serial` or `macvdmtool reboot debugusb`. This will reboot the target, and immediately put it back into serial or debugusb mode, with the right timing to make it work.
